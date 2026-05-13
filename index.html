@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- 1. Анимированный конверт -->
+<section id="envelope" class="page">
+    <div class="envelope-wrapper">
+        <div class="envelope" id="envelope-box">
+            <div class="flap"></div>
+            <div class="body"></div>
+            <div class="letter" id="letter">
+                <div class="text">Открыть приглашение</div>
+            </div>
+        </div>
+        <p class="hint-text">Нажмите на конверт</p>
+    </div>
+</section>
+
+<!-- 2. Приглашение -->
+<section id="invite" class="page">
+    <div class="content hidden">
+        <h1>Дорогие гости!</h1>
+        <p>В нашей семье предстоит особенное и торжественное событие, которое хочется разделить с самыми близкими и дорогими людьми.</p>
+        <p>Мы приглашаем вас разделить с нами радость этого дня и поздравить нашего любимого дедушку с юбилеем!</p>
+        <p>Пусть этот праздник наполнится теплом, улыбками и искренними пожеланиями здоровья, счастья и долгих лет жизни!</p>
+        <p class="event-lead">Торжество состоится</p>
+        <div class="event-date">13.06.2026</div>
+        <p class="event-time">Начало в 16:00</p>
+        <a href="#location" class="scroll-button">Место проведения →</a>
+    </div>
+</section>
+
+<!-- 3. Место проведения -->
+<section id="location" class="page">
+    <div class="content hidden">
+        <h2>Место проведения</h2>
+        <p><strong>Село Михайловка (Соморсун)</strong><br>улица Константинова, 12</p>
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A4a7566fd25576de7adb863db266b4a7620fa2d5bcdae72ebef821e9309ba8a8c&amp;source=constructor" width="500" height="400" frameborder="0"></iframe>
+        </div>
+        <a href="#countdown" class="scroll-button">До события осталось →</a>
+    </div>
+</section>
+
+<!-- 4. Таймер -->
+<section id="countdown" class="page">
+    <div class="content hidden">
+        <h2>До события осталось</h2>
+        <div class="timer">
+            <div class="unit"><span id="days">00</span><br>дней</div>
+            <div class="unit"><span id="hours">00</span><br>часов</div>
+            <div class="unit"><span id="minutes">00</span><br>минут</div>
+            <div class="unit"><span id="seconds">00</span><br>секунд</div>
+        </div>
+        <a href="#gift" class="scroll-button">Подсказка →</a>
+    </div>
+</section>
+
+<!-- 5. Подсказка -->
+<section id="gift" class="page">
+    <div class="content hidden">
+        <h2>Нам бы хотелось...</h2>
+        <p>Чтобы в этот день ваши улыбки были искренними, слова — тёплыми, сердца — наполненными любовью, а подарки — в конвертах, ведь самый лучший подарок для дедушки — это внимание и забота близких!</p>
+        <p style="margin-top: 30px; font-style: italic; color: #8b4513;">С любовью,<br>Ваша семья</p>
+        <a href="#rsvp" class="scroll-button">Заполнить анкету →</a>
+    </div>
+</section>
+
+<!-- 6. Анкета гостя -->
+<section id="rsvp" class="page">
+    <div class="content">
+        <div class="rsvp-container hidden">
+            <h2 class="rsvp-title">Анкета гостя</h2>
+            <p class="rsvp-subtitle">Пожалуйста, подтвердите свое присутствие<br>на торжестве до <strong>13 июня 2026</strong></p>
+
+            <form 
+                action="https://formsubmit.co/prigloshenie9@gmail.com" 
+                method="POST" 
+                class="rsvp-form" 
+                id="rsvpForm"
+            >
+                <input type="hidden" name="_subject" value="🎉 Новый ответ на анкету юбилея!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <div class="form-group">
+                    <label for="surname">Ваша фамилия</label>
+                    <input type="text" id="surname" name="Фамилия" placeholder="Введите здесь вашу фамилию" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="Имя" placeholder="Введите здесь ваше имя" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Подтвердите ваше присутствие</label>
+                    <p class="form-hint">Выберите один из двух вариантов</p>
+                    
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="Присутствие" value="Да, точно буду" required>
+                            <span class="radio-custom"></span>
+                            Да, точно буду
+                        </label>
+                        
+                        <label class="radio-label">
+                            <input type="radio" name="Присутствие" value="К сожалению, не смогу..." required>
+                            <span class="radio-custom"></span>
+                            К сожалению, не смогу...
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Ответить</button>
+            </form>
+
+            <p class="rsvp-note">Чтобы мы могли правильно посчитать количество гостей, просим, чтобы каждый член семьи заполнил анкету отдельно</p>
+        </div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
