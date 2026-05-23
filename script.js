@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         letter.addEventListener('click', (e) => {
             e.stopPropagation();
             // Мгновенный переход к приглашению
-            const nextSection = document.getElementById('invite');
+            const nextSection = document.getElementById('grandpa');
             if (nextSection) {
                 nextSection.scrollIntoView({ block: 'start' }); 
             }
