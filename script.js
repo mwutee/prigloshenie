@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (letter) {
         letter.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Мгновенный переход к приглашению
             const nextSection = document.getElementById('grandpa');
             if (nextSection) {
                 nextSection.scrollIntoView({ block: 'start' }); 
@@ -55,68 +54,40 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === 3. ФОРМА АНКЕТЫ (FormSubmit) ===
+    // === 3. ФОРМА АНКЕТЫ — НАТИВНАЯ ОТПРАВКА ===
     const rsvpForm = document.getElementById('rsvpForm');
-    
+    const thankYouBlock = document.getElementById('thankyou');
+
     if (rsvpForm) {
-        rsvpForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
+        rsvpForm.addEventListener('submit', () => {
             const btn = rsvpForm.querySelector('.submit-button');
-            const originalText = btn.textContent;
             btn.textContent = 'Отправляем...';
             btn.disabled = true;
-
-            try {
-                const response = await fetch(rsvpForm.action, {
-                    method: 'POST',
-                    body: new FormData(rsvpForm),
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    const msg = document.createElement('div');
-                    msg.className = 'success-message show';
-                    msg.style.cssText = `
-                        text-align: center; padding: 30px; background: #f0f8e8; 
-                        border-radius: 10px; margin-top: 20px; color: #2e7d32; 
-                        border: 2px solid #a5d6a7; animation: fadeIn 0.5s;
-                    `;
-                    msg.innerHTML = `
-                        <h3 style="margin:0 0 10px 0; font-size:1.8em;">✓ Спасибо!</h3>
-                        <p style="margin:0; font-size:1.1em;">Ваш ответ отправлен.<br>Мы ждём вас на празднике!</p>
-                    `;
-                    
-                    rsvpForm.style.display = 'none';
-                    rsvpForm.parentNode.appendChild(msg);
-                    // Плавный скролл к сообщению оставим, чтобы пользователь увидел результат
-                    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    alert('Не удалось отправить. Попробуйте ещё раз.');
-                }
-            } catch (err) {
-                alert('Ошибка сети. Проверьте подключение к интернету.');
-            } finally {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
+            // Форма отправится сама благодаря action и method="POST"
         });
     }
 
-        // === АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ===
+    // === ПОКАЗ БЛОКА "СПАСИБО" ПОСЛЕ ВОЗВРАТА ===
+    window.addEventListener('load', () => {
+        if (window.location.hash === '#thankyou' && thankYouBlock && rsvpForm) {
+            thankYouBlock.style.display = 'block';
+            thankYouBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Через 3 секунды плавно вернём внимание к форме (опционально)
+            setTimeout(() => {
+                rsvpForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 3000);
+        }
+    });
+
+    // === 4. АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ===
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            // Если элемент появился на экране
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
-            } else {
-                // Если хочешь, чтобы анимация повторялась при скролле вверх - убери комментарии ниже:
-                // entry.target.classList.remove('show'); 
             }
         });
     });
 
-    // Находим все скрытые элементы
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 });
