@@ -91,18 +91,20 @@
                 class="rsvp-form" 
                 id="rsvpForm"
             >
+                <!-- Скрытые поля FormSubmit -->
                 <input type="hidden" name="_subject" value="🎉 Новый ответ на анкету юбилея!">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="#thankyou">
 
                 <div class="form-group">
                     <label for="surname">Ваша фамилия</label>
-                    <input type="text" id="surname" name="Фамилия" placeholder="Введите здесь вашу фамилию" required>
+                    <input type="text" id="surname" name="surname" placeholder="Введите здесь вашу фамилию" required>
                 </div>
 
                 <div class="form-group">
                     <label for="name">Ваше имя</label>
-                    <input type="text" id="name" name="Имя" placeholder="Введите здесь ваше имя" required>
+                    <input type="text" id="name" name="name" placeholder="Введите здесь ваше имя" required>
                 </div>
 
                 <div class="form-group">
@@ -111,13 +113,13 @@
                     
                     <div class="radio-group">
                         <label class="radio-label">
-                            <input type="radio" name="Присутствие" value="Да, точно буду" required>
+                            <input type="radio" name="attendance" value="Да, точно буду" required>
                             <span class="radio-custom"></span>
                             Да, точно буду
                         </label>
                         
                         <label class="radio-label">
-                            <input type="radio" name="Присутствие" value="К сожалению, не смогу..." required>
+                            <input type="radio" name="attendance" value="К сожалению, не смогу..." required>
                             <span class="radio-custom"></span>
                             К сожалению, не смогу...
                         </label>
@@ -126,6 +128,12 @@
 
                 <button type="submit" class="submit-button">Ответить</button>
             </form>
+
+            <!-- Блок благодарности (показывается после отправки) -->
+            <div id="thankyou" class="success-message" style="display:none; text-align:center; padding:40px; background:#f0f8e8; border-radius:10px; margin:20px auto; max-width:600px; border:2px solid #a5d6a7; animation:fadeIn 0.5s;">
+                <h3 style="color:#b8860b; margin:0 0 15px 0; font-size:1.8em;">✓ Спасибо!</h3>
+                <p style="color:#3a3a3a; margin:0; font-size:1.1em;">Ваш ответ отправлен.<br>Мы ждём вас на празднике!</p>
+            </div>
 
             <p class="rsvp-note">Чтобы мы могли правильно посчитать количество гостей, просим, чтобы каждый член семьи заполнил анкету отдельно</p>
         </div>
