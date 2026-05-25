@@ -54,32 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === 3. ФОРМА АНКЕТЫ — НАТИВНАЯ ОТПРАВКА ===
-    const rsvpForm = document.getElementById('rsvpForm');
-    const thankYouBlock = document.getElementById('thankyou');
-
-    if (rsvpForm) {
-        rsvpForm.addEventListener('submit', () => {
-            const btn = rsvpForm.querySelector('.submit-button');
-            btn.textContent = 'Отправляем...';
-            btn.disabled = true;
-            // Форма отправится сама благодаря action и method="POST"
-        });
-    }
-
-    // === ПОКАЗ БЛОКА "СПАСИБО" ПОСЛЕ ВОЗВРАТА ===
-    window.addEventListener('load', () => {
-        if (window.location.hash === '#thankyou' && thankYouBlock && rsvpForm) {
-            thankYouBlock.style.display = 'block';
-            thankYouBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Через 3 секунды плавно вернём внимание к форме (опционально)
-            setTimeout(() => {
-                rsvpForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 3000);
-        }
-    });
-
-    // === 4. АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ===
+    // === 3. АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ===
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
